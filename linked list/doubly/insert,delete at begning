@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+// Define the Node structure
+struct Node {
+    int data;     // Data part of the node
+    Node* next;
+    Node * prev;   // Pointer to the next node
+};
+// Function to create a new node  address
+void insertAtBegning(Node*& head,int value){
+    Node* newNode = new Node(); //to take reference from struct
+    newNode->data = value; 
+    newNode->next = NULL;
+    newNode->prev=NULL;
+
+    Node* temp=head; //t=null
+    head=newNode;   //h=0x1
+    newNode->next=temp;
+}
+
+// Function to insert a node at the end of the linked list
+void deleteAtBegin(Node* & head){
+    head=head->next;
+    head->next->prev=NULL; //
+}
+
+void display(Node* & head) {
+    Node* current = head; // 0x1
+    while (current!= NULL) {
+        cout<<current->data<<"->";
+        current = current->next;
+    }
+    cout<<"NULL";
+};
+
+
+int main() {
+    Node* head = NULL; // Initialize an empty linked list
+    
+    // Insert nodes at the end
+    // insertAtEnd(head, 10);//..
+    // insertAtEnd(head, 20);
+    // insertAtEnd(head, 30);
+    // insertAtEnd(head, 40);
+    // insertAtEnd(head,50);
+
+    insertAtBegning(head,60);
+    insertAtBegning(head,50);
+    insertAtBegning(head,40);
+    insertAtBegning(head,30);
+
+    // deletee(head);
+    deleteAtBegin(head);
+    display(head);
+}
