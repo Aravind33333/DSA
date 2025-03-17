@@ -1,0 +1,82 @@
+/*Binary Search Tree - Linked List Implementation - Height, FindMin, FindMax*/
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* insert(Node* root, int val) {
+    if (root == NULL){
+        Node* newnode = new Node(); //1000
+        newnode->data = val;
+        newnode->left = NULL;
+        newnode->right = NULL;
+        return newnode; //1
+    }
+    else if (val < root->data) {
+        root->left = insert(root->left, val);
+    }
+    else {
+        root->right = insert(root->right, val);
+    }
+    return root;
+}
+
+void inorder(Node* root) { //1000
+    if (root != NULL) {
+        inorder(root->left);  //
+        cout << root->data << " "; //
+        inorder(root->right); // 
+    }
+   
+}
+
+int getHeight(Node* root) { //provide the height of each nodes in the tree and returns height of root+1 
+    if (root == NULL) 
+    {
+        return 0;
+    }
+    int leftHeight = getHeight(root->left); // 0
+    int rightHeight = getHeight(root->right); // 
+    return 1 + max(leftHeight, rightHeight); // 0,1=> 1
+}
+
+int findMaximum(Node *root)
+{
+    while(root->right!=NULL) //loop to traverse to the right most element ij the tree
+    {
+        root = root->right;
+    }
+    return (root->data);
+}
+
+int findMinimum(Node *curr)
+{
+    while(curr->left!=NULL)//loop to traverse to the left most element ij the tree
+    {
+        curr = curr->left;
+    }
+    return (curr->data);
+}
+
+
+int main() {
+    Node* root = NULL;
+    int val;
+    cin >> val;
+    while ( val > 0 ) {
+        root = insert( root, val);
+        cin>>val;
+    }
+    cout << "Tree values are:" << endl;
+    inorder( root );
+    cout << "\nMaximum element is "<< findMaximum( root ) <<endl;
+    cout << "Minimum element is "<< findMinimum( root ) << endl;
+    int height = getHeight(root);
+    cout << height << endl;
+    return 0;
+}
+// 50 40 45 60 35 
